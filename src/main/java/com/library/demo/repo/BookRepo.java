@@ -15,4 +15,10 @@ public interface BookRepo extends JpaRepository<BookEntity, Integer> {
     String findEarliestBook();
 
     List<BookEntity> findAllByYearBetween(int min, int max);
+
+    @Query("select b.title, a.firstName, a.secondName, b.year from AuthorEntity a left join BookEntity b on a.id = b.authorId")
+    List<String> joinBookString();
+
+    @Query("select b.title, a.firstName, a.secondName, b.year from AuthorEntity a left join BookEntity b on a.id = b.authorId")
+    List<Object[]> joinBookObj();
 }
